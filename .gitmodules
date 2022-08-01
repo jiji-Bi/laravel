@@ -1,0 +1,6 @@
+[submodule "public/public/Laravel-From-Scratch-HTML-CSS/images"]
+	path = public/public/Laravel-From-Scratch-HTML-CSS/images
+	url = https://github.com/laracasts/Laravel-From-Scratch-HTML-CSS.git
+[submodule "public/Laravel-From-Scratch-HTML-CSS/images"]
+	path = public/Laravel-From-Scratch-HTML-CSS/images
+	url = https://github.com/laracasts/Laravel-From-Scratch-HTML-CSS.git
