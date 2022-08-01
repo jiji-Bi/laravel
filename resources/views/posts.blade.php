@@ -1,5 +1,4 @@
-@extends('layout')
-
+{{--
 @section('banner')
 <h1>My blog </h1>
 @endsection
@@ -22,4 +21,34 @@
 
         </article>
         @endforeach
-@endsection
+ --}}
+ @extends('layout')
+ @include('post-card')
+ @include('featured-post-card')
+
+ @section('content')
+ <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+
+    @yield('featured')
+    @yield('featured')
+    @yield('featured')
+
+    <div class="lg:grid lg:grid-cols-2">
+        @yield('card')
+        @yield('card')
+    </div>
+
+    <div class="lg:grid lg:grid-cols-3">
+
+        @yield('card')
+        @yield('card')
+        @yield('card')
+
+    </div>
+</main>
+
+ @endsection
+
+
+
+
