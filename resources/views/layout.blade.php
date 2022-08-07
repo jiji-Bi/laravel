@@ -1,16 +1,19 @@
+@include('drop-down')
+@include('icon')
 <!doctype html>
 
 <title>Laravel From Scratch Blog</title>
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <body style="font-family: Open Sans, sans-serif">
     <section class="px-6 py-8">
         <nav class="md:flex md:justify-between md:items-center">
             <div>
                 <a href="/">
-                    <img src="Laravel-From-Scratch-HTML-CSS/images/images/logo.svg" alt="Laracasts Logo" width="165" height="16">
+                    <img src="/Laravel-From-Scratch-HTML-CSS/images/images/logo.svg" alt="Laracasts Logo" width="165" height="16">
                 </a>
             </div>
 
@@ -28,34 +31,22 @@
                 Latest <span class="text-blue-500">Laravel From Scratch</span> News
             </h1>
 
-            <h2 class="inline-flex mt-2">By Lary Laracore <img src="Laravel-From-Scratch-HTML-CSS/images/images/lary-head.svg"
+            <h2 class="inline-flex mt-2">By Lary Laracore <img src="/Laravel-From-Scratch-HTML-CSS/images/images/lary-head.svg"
                                                                alt="Head of Lary the mascot"></h2>
 
-            <p class="text-sm mt-14">
-                Another year. Another update. We're refreshing the popular Laravel series with new content.
-                I'm going to keep you guys up to speed with what's going on!
-            </p>
 
             <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-8">
                 <!--  Category -->
-                <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
-                    <select class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold">
-                        <option value="category" disabled selected>Category
-                        </option>
-                        <option value="personal">Personal</option>
-                        <option value="business">Business</option>
-                    </select>
-
-                    <svg class="transform -rotate-90 absolute pointer-events-none" style="right: 12px;" width="22"
-                         height="22" viewBox="0 0 22 22">
-                        <g fill="none" fill-rule="evenodd">
-                            <path stroke="#000" stroke-opacity=".012" stroke-width=".5" d="M21 1v20.16H.84V1z">
-                            </path>
-                            <path fill="#222"
-                                  d="M13.854 7.224l-3.847 3.856 3.847 3.856-1.184 1.184-5.04-5.04 5.04-5.04z"></path>
-                        </g>
-                    </svg>
-                </div>
+                {{-- <select class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold">
+                    
+                    @foreach($categories as $category)
+                        <option value="{{ $category->slug }}">{{ $category->name }} </option>
+                    @endforeach
+                </select> --}}
+                {{-- hiding the links with show:false --}}
+                 <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
+                   @yield('drop-down')
+                </div> 
 
                 <!-- Other Filters -->
                 <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
@@ -67,24 +58,17 @@
                         <option value="bar">Bar
                         </option>
                     </select>
-
-                    <svg class="transform -rotate-90 absolute pointer-events-none" style="right: 12px;" width="22"
-                         height="22" viewBox="0 0 22 22">
-                        <g fill="none" fill-rule="evenodd">
-                            <path stroke="#000" stroke-opacity=".012" stroke-width=".5" d="M21 1v20.16H.84V1z">
-                            </path>
-                            <path fill="#222"
-                                  d="M13.854 7.224l-3.847 3.856 3.847 3.856-1.184 1.184-5.04-5.04 5.04-5.04z"></path>
-                        </g>
-                    </svg>
+                        @yield('icon-svg')
                 </div>
 
                 <!-- Search -->
                 <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
                     <form method="GET" action="#">
                         <input type="text" name="search" placeholder="Find something"
-                               class="bg-transparent placeholder-black font-semibold text-sm">
-                    </form>
+                               class="bg-transparent placeholder-black font-semibold text-sm"
+                               value={{ request('search') }}>
+
+                            </form>
                 </div>
             </div>
         </header>
@@ -100,7 +84,7 @@
                     <form method="POST" action="#" class="lg:flex text-sm">
                         <div class="lg:py-3 lg:px-5 flex items-center">
                             <label for="email" class="hidden lg:inline-block">
-                                <img src="Laravel-From-Scratch-HTML-CSS/images/images/mailbox-icon.svg" alt="mailbox letter">
+                                <img src="/Laravel-From-Scratch-HTML-CSS/images/images/mailbox-icon.svg" alt="mailbox letter">
                             </label>
 
                             <input id="email" type="text" placeholder="Your email address"

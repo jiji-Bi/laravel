@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
@@ -49,19 +50,14 @@ use Illuminate\Support\Facades\File;
 // });
 
 //laravel's collections 
-Route::get('/', function () {
-    return view('posts', ['posts' => Post::latest('created_at')->get()]);
-});
+Route::get('/', [PostController::class, 'index']);
 
-Route::get("posts/{post:slug}", function (Post $post) {
-    // Post::where('slug',$post)
-    return view('post', ['post' => $post]);
-}); //->where('post', '[0-9A-z]+');
+Route::get("posts/{post:slug}", [PostController::class, 'show']); //->where('post', '[0-9A-z]+');
 
 Route::get("categories/{category:slug}", function (Category $category) {
-    return view('posts', ['posts' => $category->posts]);
+    return view('posts', ['posts' => $category->posts, 'categories' => Category::all(), 'currentCategory' => $category]);
 });
 
 Route::get("authors/{author:name}", function (User $author) {
-    return view('posts', ['posts' => $author->posts]);
+    return view('posts', ['posts' => $author->posts, 'categories' => Category::all()]);
 });

@@ -23,28 +23,18 @@
         @endforeach
  --}}
  @extends('layout')
- @include('post-card')
- @include('featured-post-card')
-
  @section('content')
+ @include('post-grid')
  <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
 
-    @yield('featured')
-    @yield('featured')
-    @yield('featured')
-
-    <div class="lg:grid lg:grid-cols-2">
-        @yield('card')
-        @yield('card')
-    </div>
-
-    <div class="lg:grid lg:grid-cols-3">
-
-        @yield('card')
-        @yield('card')
-        @yield('card')
-
-    </div>
+    {{-- having at least one single post --}}
+    @if($posts->count())
+        @include('featured-post-card', ['post' => $posts[0]] )
+        @yield('featured')
+        @yield('grid')
+        @else
+        <p class="text-center"> No posts to display for now, come back later </p>
+    @endif    
 </main>
 
  @endsection
