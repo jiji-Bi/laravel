@@ -40,11 +40,55 @@ class Post extends Model
     //   query scope 
     public function scopefilter($query, array $filters) // Post::newQuery()->filter()
     {
-        if (isset($filters['search'])) {
-            $query
-                ->where('title', 'like', '%' . request('search') . '%')
-                ->orwhere('body', 'like', '%' . request('search') . '%')
-                ->orwhere('excerpt', 'like', '%' . request('search') . '%');
-        }
+        // if (isset($filters['search'])) {
+        //     $query
+        //         ->where('title', 'like', '%' . request('search') . '%')
+        //         ->orwhere('body', 'like', '%' . request('search') . '%')
+        //         ->orwhere('excerpt', 'like', '%' . request('search') . '%');
+        // }
+
+        //--------------Null coalescing operator-------------------------------
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            //dd(request(['search']), $search);
+            $query->where(function ($query) use ($search) {
+                $query
+                    ->where('title', 'like', '%' . $search . '%')
+                    ->orwhere('body', 'like', '%' . $search . '%')
+                    ->orwhere('excerpt', 'like', '%' . $search . '%');
+            });
+        });
+
+        $query->when(
+            $filters['category'] ?? false,
+            function ($query, $category) {
+                $query
+                    ->whereExists(
+                        function ($query) use ($category) {
+                            $query->from('categories')
+                                ->whereColumn('categories.id', 'posts.category_id')
+                                //we specfiy the query keyword in the url 
+                                ->where('categories.slug', $category);
+                        }
+                    );
+            }
+        );
+        $query->when(
+            $filters['author'] ?? false,
+            function ($query, $author) {
+                $query
+                    ->whereExists(
+                        function ($query) use ($author) {
+                            $query->from('users')
+                                ->whereColumn('users.id', 'posts.user_id')
+                                ->where('users.name', $author);
+                        }
+                    );
+            }
+        );
+        // ->where('title', 'like', '%' . $category . '%')
+        // ->orwhere('body', 'like', '%' . $category . '%')
+        // ->orwhere('excerpt', 'like', '%' . $category . '%');
+
+        //dd(request(['search']), $search);           
     }
 }

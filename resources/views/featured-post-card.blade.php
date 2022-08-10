@@ -16,7 +16,7 @@ class="transition-colors duration-300 hover:bg-gray-100 border border-black bord
 
             <div class="mt-4">
                 <h1 class="text-3xl">
-                    <a href="/posts/{{ $post->slug }}"> 
+                    <a href="/?category={{ $post->category->slug }}">
                         {{ $post->title }}
                     </a>
                 </h1>
@@ -42,7 +42,7 @@ class="transition-colors duration-300 hover:bg-gray-100 border border-black bord
             <div class="flex items-center text-sm">
                 <img src="/Laravel-From-Scratch-HTML-CSS/images/images/lary-avatar.svg" alt="Lary avatar">
                     <div class="ml-3">
-                         <a href="/authors/{{ $post->author->name }}">
+                        <a href="/?author={{ $post->author->name }}">
                             {{ $post->author->name }}
                          </a>
                     </div>

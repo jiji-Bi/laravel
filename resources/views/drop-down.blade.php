@@ -5,13 +5,14 @@
         {{ isset($currentCategory) ? $currentCategory->name : 'categories'; }}
         
         @yield('icon-svg')
-            
+
     </button>
 
     <div x-show="show" class="py-2 absolute bg-gray-100 w-full mt-2 rounded-xl  w-32 max-h-52 overflow-auto" style="display:none">
         <a href="/" class="block text-left px-3 text-xs leading-8 hover:bg-blue-300 focus:bg-blue-300  hover:text-white">All</a>
         @foreach ( $categories as $category)
-         <a href="/categories/{{ $category->slug }}" 
+         {{-- <a href="/?category={{ $category->slug}}"  --}}
+            <a href="{{ request()->fullUrlWithQuery(['category'=>$category->slug]) }}"
             class="block text-left px-3 text-xs leading-8 hover:bg-blue-300 focus:bg-blue-300  hover:text-white                         
              {{ isset($currentCategory) &&  $currentCategory->id === $category->id ? 'bg-blue-500 text-white' : '' }}
              ">{{ $category->name }}</a>

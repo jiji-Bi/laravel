@@ -32,6 +32,7 @@
         @include('featured-post-card', ['post' => $posts[0]] )
         @yield('featured')
         @yield('grid')
+        {{ $posts->links() }}
         @else
         <p class="text-center"> No posts to display for now, come back later </p>
     @endif    

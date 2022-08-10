@@ -28,8 +28,9 @@
                     <div class="flex items-center lg:justify-center text-sm mt-4">
                         <img src="/Laravel-From-Scratch-HTML-CSS/images/images/lary-avatar.svg" alt="Lary avatar">
                         <div class="ml-3 text-left">
-                            <h5 class="font-bold">{{ $post->author->name }}</h5>
-                        </div>
+                            <a href="/?author={{ $post->author->name }}">
+                                {{ $post->author->name }}
+                             </a>                        </div>
                     </div>
                 </div>
 

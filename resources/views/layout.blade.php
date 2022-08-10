@@ -63,16 +63,21 @@
 
                 <!-- Search -->
                 <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
-                    <form method="GET" action="#">
-                        <input type="text" name="search" placeholder="Find something"
-                               class="bg-transparent placeholder-black font-semibold text-sm"
-                               value={{ request('search') }}>
-
+                            <form method="GET" action="">
+                                @if(request('category'))
+                                    <input type="hidden" name="category" placeholder="Find something"
+                                    class="bg-transparent placeholder-black font-semibold text-sm"
+                                    value={{ request('category') }}>
+                                @endif
+                                <input type="text" name="search" placeholder="Find something"
+                                       class="bg-transparent placeholder-black font-semibold text-sm"
+                                       value={{ request('search') }}>
                             </form>
                 </div>
             </div>
         </header>
          @yield('content')
+         
         <footer class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16">
             <img src="Laravel-From-Scratch-HTML-CSS/images/images/lary-newsletter-icon.svg" alt="" class="mx-auto -mb-6" style="width: 145px;">
             <h5 class="text-3xl">Stay in touch with the latest posts</h5>
