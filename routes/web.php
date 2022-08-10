@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PostController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\File;
 // Route::get('/', function () {
 //     $files = Post::all();
 //     $posts = [];
-//     foreach ($files as $file) {
+//     "forea"ch ($files as $file) {
 //         $documents = YamlFrontMatter::parseFile($file);
 //         $posts[] = new Post(
 //             $documents->title,
@@ -54,10 +55,4 @@ Route::get('/', [PostController::class, 'index']);
 
 Route::get("posts/{post:slug}", [PostController::class, 'show']); //->where('post', '[0-9A-z]+');
 
-// Route::get("categories/{category:slug}", function (Category $category) {
-//     return view('posts', ['posts' => $category->posts, 'categories' => Category::all(), 'currentCategory' => $category]);
-// });
-
-// Route::get("authors/{author:name}", function (User $author) {
-//     return view('posts', ['posts' => $author->posts, /*'categories' => Category::all()*/]);
-// });
+Route::get('/register', [RegisterController::class, 'create']);
