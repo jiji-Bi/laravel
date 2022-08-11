@@ -24,9 +24,10 @@
  --}}
  @extends('layout')
  @section('content')
+ @include('header')
  @include('post-grid')
  <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
-
+@yield('header')
     {{-- having at least one single post --}}
     @if($posts->count())
         @include('featured-post-card', ['post' => $posts[0]] )
